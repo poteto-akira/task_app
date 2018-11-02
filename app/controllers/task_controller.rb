@@ -16,6 +16,10 @@ class TaskController < ApplicationController
   end
 
   def show
+    @task = Task.find_by(id: params[:id])
+  end
+
+  def update
   end
 
   def destroy

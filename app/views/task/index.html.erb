@@ -3,7 +3,6 @@
 
 <% @task.each do |task| %>
   <div>
-    <%= task.name %>/
-    <%= task.content %>
+    <%= link_to( task.name ,"/task/show/#{task.id}") %>/
   </div>
 <% end %>

@@ -11,15 +11,32 @@ class TaskController < ApplicationController
   def create
     @task = Task.new(name: params[:name],
                      content: params[:content])
-    @task.save
-    redirect_to("/")
+    if @task.save
+      # flash[:notice] = "タスクを登録しました"
+      redirect_to("/", notice: "タスクを登録しました") #引数に文字列を渡してもflash配列にメッセージを格納できる
+    else
+      render "new"
+    end
   end
 
   def show
-    @task = Task.find_by(id: params[:id])
+    @task = Task.find_by(id: params[:id]) #URLからタスクのidを取得して@Taskに代入
+  end
+
+  def edit #タスクの編集ページ
+    @task = Task.find_by(id: params[:id]) #URLからタスクのidを取得して@Taskに代入
+
   end
 
   def update
+    @task = Task.find_by(id: params[:id]) #URLからタスクのidを取得して@Taskに代入
+    @task.name = params[:name]
+    @task.content = params[:content]
+    if @task.save
+      redirect_to("/", notice: "タスクを編集しました")
+    else
+      render "edit"
+    end
   end
 
   def destroy

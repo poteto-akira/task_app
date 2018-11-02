@@ -1,6 +1,6 @@
 <h1>詳細</h1>
 
   <div>
-    <%= @task.name %>
+    <%= link_to(@task.name, "/task/edit/#{@task.id}") %>
     <%= @task.content %>
   </div>

@@ -40,6 +40,9 @@ class TaskController < ApplicationController
   end
 
   def destroy
+    @task = Task.find_by(id: params[:id])
+    @task.destroy
+    redirect_to("/", notice: "タスクを削除しました")
   end
 
 

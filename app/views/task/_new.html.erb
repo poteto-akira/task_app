@@ -1,0 +1,32 @@
+<h1>新規作成</h1>
+
+
+<%= form_tag("/task/create") do %>
+  <div>
+    <input name="name" id="input1" placeholder="タスク名" type="text" autocomplete="off"></input>
+  </div>
+
+  <div>
+    <textarea name="content" placeholder="メモ" type="text" autocomplete="off"></textarea>
+  </div>
+
+  <div>
+    <input class="submit" id="submit1" type="submit" value="登録">
+  </div>
+<% end %>
+
+    <!-- フォームに１文字以上入力しないとsubmitボタンが有効にならない -->
+    <script>
+      $(function(){
+        if ($("#input1").val().length == 0) {
+          $("#submit1").prop("disabled", true);
+        }
+        $("#input1").on("keydown keyup keypress change", function() {
+          if ($(this).val().length < 1) {
+            $("#submit1").prop("disabled", true);
+          } else {
+            $("#submit1").prop("disabled", false);
+          }
+        });
+      });
+    </script>

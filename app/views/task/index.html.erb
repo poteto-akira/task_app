@@ -1,8 +1,14 @@
-<h1>タスク一覧</h1>
-<%= link_to("新規作成","/task/new")%>
+<!-- _new.html.erbのテンプレートを表示 -->
+<%= render ("new") %>
 
+<h1>タスク一覧</h1>
+
+<% if @task %>
 <% @task.each do |task| %>
   <div>
     <%= link_to( task.name ,"/task/show/#{task.id}") %>/
   </div>
+<% end %>
+<% else %>
+タスクありません
 <% end %>

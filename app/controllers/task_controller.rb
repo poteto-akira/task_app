@@ -15,7 +15,7 @@ class TaskController < ApplicationController
       # flash[:notice] = "タスクを登録しました"
       redirect_to("/", notice: "タスクを登録しました") #引数に文字列を渡してもflash配列にメッセージを格納できる
     else
-      render "new"
+      redirect_to("/", notice: "タスクが正常に登録できませんでした")
     end
   end
 

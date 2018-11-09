@@ -63,3 +63,6 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 #  error messageの日本語化
 gem 'rails-i18n'
+
+# パスワードのハッシュ化
+gem 'bcrypt',         '3.1.12'

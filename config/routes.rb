@@ -10,9 +10,10 @@ Rails.application.routes.draw do
   post "task/destroy/:id" => "task#destroy"
 
 # ユーザー関連
-  get "user/show" => "user#show"
+  get "user/show/:id" => "user#show"
   get "user/edit/:id" => "user#edit"
   get "user/new" => "user#new"
+  post "user/new" => "user#create"
   post "user/create" => "user#create"
 
 end

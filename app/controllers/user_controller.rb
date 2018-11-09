@@ -8,8 +8,7 @@ class UserController < ApplicationController
   end
 
   def create
-    @user = User.new(username: params[:username],
-                     password: "foobar",password_confirmation: "foobar")
+    @user = User.new(user_params)
     if @user.save
       redirect_to("/", notice: "ユーザー登録が完了しました")
     else
@@ -23,4 +22,11 @@ class UserController < ApplicationController
 
   def destroy
   end
+
+  private
+
+  # # createメソッドからくる
+    def user_params
+      params.require(:user).permit(:username, :password, :password_confirmation)
+    end
 end

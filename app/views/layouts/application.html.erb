@@ -12,10 +12,22 @@
   </head>
 
   <body>
+
+    <!-- ヘッダーエリア -->
+    <% if logged_in? %>
+      <%= link_to("Users","#") %>
+      <%= link_to("Profile","#") %>
+      <%= link_to("Settings","#") %>
+      <%= link_to("Log out",logout_path, method: :delete) %>
+    <% else %>
+      <%= link_to("Log in",login_path) %>
+      <%= link_to("Sign up",user_new_path) %>
+    <% end %>
+
+    <!-- フラッシュメッセージ -->
     <% if flash[:notice] %>
       <p><%= flash[:notice] %></p>
     <% end %>
-
 
 
     <%= yield %>

@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  get 'sessions/new'
 # タスク関連
   get '/' => "task#index"
   get "task/new" => "task#new"
@@ -15,5 +16,9 @@ Rails.application.routes.draw do
   get "user/new" => "user#new"
   post "user/new" => "user#create"
   post "user/create" => "user#create"
+  get "login" => "sessions#new"
+  post "login" => "sessions#create"
+  delete "logout" => "sessions#destroy"
+
 
 end

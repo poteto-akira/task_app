@@ -12,6 +12,11 @@
     <input name="session[password]" placeholder="6文字以上" type="password" autocomplete="off">
   </div>
 
+  <%= f.label :remember_me, class: "checkbox inline" do %>
+    <%= f.check_box :remember_me %>
+    <span>Remember me on this computer</span>
+  <% end %>
+
   <div>
     <input class="submit" id="submit1" type="submit" value="登録">
   </div>

@@ -9,7 +9,9 @@ class SessionsController < ApplicationController
     if user && user.authenticate(params[:session][:password])
       log_in user
       params[:session][:remember_me] == "1"? remember(user) : forget(user)
-      redirect_to("/", notice: "ログインしました")
+      # redirect_to("/", notice: "ログインしました")
+      flash[:notice] = "ログインしました"
+      redirect_back_or "/"
     else
       flash.now[:danger] = "invalid username/password combination"
       render"new"

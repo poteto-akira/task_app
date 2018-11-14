@@ -13,6 +13,8 @@ Rails.application.routes.draw do
 # ユーザー関連
   get "user/show/:id" => "user#show"
   get "user/edit/:id" => "user#edit"
+  patch "user/update/:id" => "user#update"
+  delete "user/delete/:id" => "user#destroy"
   get "user/new" => "user#new"
   post "user/new" => "user#create"
   post "user/create" => "user#create"

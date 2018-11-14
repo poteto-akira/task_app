@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_12_050013) do
+ActiveRecord::Schema.define(version: 2018_11_14_090730) do
 
   create_table "tasks", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
@@ -35,6 +35,7 @@ ActiveRecord::Schema.define(version: 2018_11_12_050013) do
     t.datetime "updated_at", null: false
     t.string "password_digest", null: false
     t.string "remember_digest"
+    t.boolean "admin", default: false
   end
 
 end

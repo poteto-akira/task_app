@@ -48,14 +48,7 @@ class UserController < ApplicationController
 
   # beforeアクション
 
-  # ログイン済みかユーザーかどうか確認
-  def logged_in_user
-    unless logged_in?
-      store_location
-      redirect_to login_url, notice: "ログインしてください"
-    end
-  end
-
+  
   # 正しいユーザーかどうか確認
   def correct_user
     @user = User.find_by(id: params[:id])

@@ -3,6 +3,7 @@ class User < ApplicationRecord
   validates :username, presence: true, uniqueness: true, format: { with: /\A[a-z0-9]+\z/i }, allow_blank: false
   validates :password, presence: true, length: { minimum: 6 }, allow_blank: false
   has_secure_password
+  has_many :tasks, dependent: :destroy
 
  # 渡された文字列のハッシュ値を返す
   def User.digest(string)
@@ -31,6 +32,12 @@ class User < ApplicationRecord
   #ユーザーのログイン情報を破棄する
   def forget
     update_attribute(:remember_digest, nil)
+  end
+
+  # 施策feedの定義
+  # 完全な実装は次章
+  def feed
+    Task.where("user_id=?", id)
   end
 
 end

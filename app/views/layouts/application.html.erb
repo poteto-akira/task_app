@@ -15,10 +15,12 @@
 
     <!-- ヘッダーエリア -->
     <% if logged_in? %>
+      <%= link_to("Home","/") %>
       <%= link_to("Users","#") %>
       <%= link_to("Profile","#") %>
       <%= link_to("Settings", "/user/edit/#{current_user.id}" ) %>
-      <%= link_to("Log out",logout_path, method: :delete) %>
+      <h3>現在のユーザー: <%= current_user.username %></h3>
+
     <% else %>
       <%= link_to("Log in",login_path) %>
       <%= link_to("Sign up",user_new_path) %>

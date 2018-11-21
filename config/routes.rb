@@ -9,6 +9,11 @@ Rails.application.routes.draw do
   post "task/update/:id" => "task#update"
   post "task/create" => "task#create"
   post "task/destroy/:id" => "task#destroy"
+  get "task/next/:id" => "task#next"
+  post "task/next/:id" => "task#next"
+  get "task/back/:id" => "task#back"
+  post "task/back/:id" => "task#back"
+
 
 # ユーザー関連
   get "user/show/:id" => "user#show"
@@ -21,6 +26,7 @@ Rails.application.routes.draw do
   get "login" => "sessions#new"
   post "login" => "sessions#create"
   delete "logout" => "sessions#destroy"
+
 
 
 end

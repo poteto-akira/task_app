@@ -41,18 +41,12 @@ class UserController < ApplicationController
 
   private
 
-  # createメソッドからくる
     def user_params
       params.require(:user).permit(:username, :password, :password_confirmation)
     end
 
-  # beforeアクション
-
-  
-  # 正しいユーザーかどうか確認
-  def correct_user
-    @user = User.find_by(id: params[:id])
-    # 遷移先のユーザーと現在ログイン中のユーザーが異なる場合、ホームにリダイレクトする
-    redirect_to("/") unless current_user?(@user) # session_helper
-  end
+    def correct_user
+      @user = User.find_by(id: params[:id])
+      redirect_to("/") unless current_user?(@user) # session_helper
+    end
 end

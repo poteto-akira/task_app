@@ -50,16 +50,15 @@ class TaskController < ApplicationController
   end
 
   def show
-    @task = Task.find_by(id: params[:id]) #URLからタスクのidを取得して@Taskに代入
+    @task = Task.find_by(id: params[:id])
   end
 
-  def edit #タスクの編集ページ
-    @task = Task.find_by(id: params[:id]) #URLからタスクのidを取得して@Taskに代入
-
+  def edit
+    @task = Task.find_by(id: params[:id])
   end
 
   def update
-    @task = Task.find_by(id: params[:id]) #URLからタスクのidを取得して@Taskに代入
+    @task = Task.find_by(id: params[:id])
     @task.name = params[:name]
     @task.content = params[:content]
     if @task.save
@@ -80,6 +79,4 @@ private
   def task_params
     params.require(:task).permit(:name)
   end
-
-
 end

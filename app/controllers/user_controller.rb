@@ -1,7 +1,6 @@
 class UserController < ApplicationController
   before_action :logged_in_user, only: [:edit, :update, :destroy]
   before_action :correct_user, only: [:edit, :update]
-  
   def new
     @user = User.new
   end
@@ -18,6 +17,7 @@ class UserController < ApplicationController
     else
       render("new")
     end
+
   end
 
   def edit
@@ -26,6 +26,7 @@ class UserController < ApplicationController
 
   def update
     @user = User.find_by(id: params[:id])
+    # update_attributesメソッドは属性のハッシュを受け取り、成功時には更新と保存を続けて同時に行う
     if @user.update_attributes(user_params)
       redirect_to("/", notice: "ユーザー情報を変更しました")
     else
@@ -40,12 +41,18 @@ class UserController < ApplicationController
 
   private
 
+  # createメソッドからくる
     def user_params
       params.require(:user).permit(:username, :password, :password_confirmation)
     end
 
+  # beforeアクション
+
+  
+  # 正しいユーザーかどうか確認
   def correct_user
     @user = User.find_by(id: params[:id])
-    redirect_to("/") unless current_user?(@user)
+    # 遷移先のユーザーと現在ログイン中のユーザーが異なる場合、ホームにリダイレクトする
+    redirect_to("/") unless current_user?(@user) # session_helper
   end
 end

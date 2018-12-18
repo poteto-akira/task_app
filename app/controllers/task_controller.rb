@@ -14,10 +14,8 @@ class TaskController < ApplicationController
                      content: params[:content],
                      user_id: current_user.id,
                      current_task_id: 1)
-    # @task = current_user.tasks.build(task_params)
     if @task.save
-      # flash[:notice] = "タスクを登録しました"
-      redirect_to("/", notice: "タスクを登録しました") #引数に文字列を渡してもflash配列にメッセージを格納できる
+      redirect_to("/", notice: "タスクを登録しました") 
     else
       redirect_to("/", notice: "タスクが正常に登録できませんでした")
     end

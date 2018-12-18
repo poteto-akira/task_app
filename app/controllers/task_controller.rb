@@ -15,7 +15,7 @@ class TaskController < ApplicationController
                      user_id: current_user.id,
                      current_task_id: 1)
     if @task.save
-      redirect_to("/", notice: "タスクを登録しました") 
+      redirect_to("/", notice: "タスクを登録しました")
     else
       redirect_to("/", notice: "タスクが正常に登録できませんでした")
     end
@@ -76,6 +76,7 @@ class TaskController < ApplicationController
   end
 
 private
+
   def task_params
     params.require(:task).permit(:name)
   end

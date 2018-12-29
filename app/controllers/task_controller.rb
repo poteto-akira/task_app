@@ -51,13 +51,14 @@ class TaskController < ApplicationController
 
   def show
     @task = Task.find_by(id: params[:id])
+  end
 
-  def edit #タスクの編集ページ
+  def edit
     @task = Task.find_by(id: params[:id])
   end
 
   def update
-    @task = Task.find_by(id: params[:id]) 
+    @task = Task.find_by(id: params[:id])
     @task.name = params[:name]
     @task.content = params[:content]
     if @task.save
@@ -74,9 +75,8 @@ class TaskController < ApplicationController
   end
 
 private
+
   def task_params
     params.require(:task).permit(:name)
   end
-
-
 end

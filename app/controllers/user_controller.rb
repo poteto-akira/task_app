@@ -26,7 +26,6 @@ class UserController < ApplicationController
 
   def update
     @user = User.find_by(id: params[:id])
-    # update_attributesメソッドは属性のハッシュを受け取り、成功時には更新と保存を続けて同時に行う
     if @user.update_attributes(user_params)
       redirect_to("/", notice: "ユーザー情報を変更しました")
     else

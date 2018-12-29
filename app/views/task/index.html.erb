@@ -1,8 +1,50 @@
-<h1>タスク一覧</h1>
-<%= link_to("新規作成","/task/new")%>
+<!-- <%= link_to("ユーザー登録", "/user/new") %>
+<%= link_to("ログイン", "/login") %> -->
 
-<% @task.each do |task| %>
-  <div>
-    <%= link_to( task.name ,"/task/show/#{task.id}") %>/
-  </div>
+<!-- _new.html.erbのテンプレートを表示 -->
+<%= render ("new") %>
+
+<% if logged_in? %>
+
+  <h1>タスク一覧</h1>
+
+  <!-- 現在ログインしているユーザーのタスクを一覧表示 -->
+
+  <table>
+    <tr>
+      <th>not started yet</th>
+      <th>working now</th>
+      <th>completion</th>
+    </tr>
+    <tr>
+      <td>
+        <% current_user.tasks.each do |task| %>
+          <% if task.current_task_id == 1 %>
+            <li>
+              <%= link_to(task.name ,"/task/show/#{task.id}") %> / <%= link_to("次","/task/next/#{task.id}") %>
+            </li>
+          <% end %>
+        <% end %>
+      </td>
+      <td>
+        <% current_user.tasks.each do |task| %>
+          <% if task.current_task_id == 2 %>
+            <li>
+              <%= link_to("前","/task/back/#{task.id}") %> / <%= link_to(task.name ,"/task/show/#{task.id}") %> / <%= link_to("次","/task/next/#{task.id}") %>
+            </li>
+          <% end %>
+        <% end %>
+      </td>
+      <td>
+        <% current_user.tasks.each do |task| %>
+          <% if task.current_task_id == 3 %>
+            <li>
+              <%= link_to("前","/task/back/#{task.id}") %> / <%= link_to(task.name ,"/task/show/#{task.id}") %>
+            </li>
+          <% end %>
+        <% end %>
+      </td>
+    </tr>
+  </table>
+
 <% end %>

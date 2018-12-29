@@ -26,7 +26,6 @@ class UserController < ApplicationController
 
   def update
     @user = User.find_by(id: params[:id])
-    # update_attributesメソッドは属性のハッシュを受け取り、成功時には更新と保存を続けて同時に行う
     if @user.update_attributes(user_params)
       redirect_to("/", notice: "ユーザー情報を変更しました")
     else
@@ -45,8 +44,8 @@ class UserController < ApplicationController
       params.require(:user).permit(:username, :password, :password_confirmation)
     end
 
-  def correct_user
-    @user = User.find_by(id: params[:id])
-    redirect_to("/") unless current_user?(@user) # session_helper
-  end
+    def correct_user
+      @user = User.find_by(id: params[:id])
+      redirect_to("/") unless current_user?(@user) # session_helper
+    end
 end

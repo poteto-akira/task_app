@@ -7,12 +7,30 @@
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
   </head>
 
   <body>
+
+    <!-- ヘッダーエリア -->
+    <% if logged_in? %>
+      <%= link_to("Home","/") %>
+      <%= link_to("Users","#") %>
+      <%= link_to("Profile","#") %>
+      <%= link_to("Settings", "/user/edit/#{current_user.id}" ) %>
+      <h3>現在のユーザー: <%= current_user.username %></h3>
+
+    <% else %>
+      <%= link_to("Log in",login_path) %>
+      <%= link_to("Sign up",user_new_path) %>
+    <% end %>
+
+    <!-- フラッシュメッセージ -->
     <% if flash[:notice] %>
       <p><%= flash[:notice] %></p>
     <% end %>
+
 
     <%= yield %>
   </body>

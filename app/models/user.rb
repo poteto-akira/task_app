@@ -20,7 +20,7 @@ class User < ApplicationRecord
   #永続セッションのためにユーザーをデータベースに記憶する
   def remember
     self.remember_token = User.new_token
-    update_attribute(:remember_digest, User.digest(remember_token))
+    update_attribute(:remember_digest, User.digest(remember_token)) # remember_digestカラムをremember_tokenで更新
   end
 
   #渡されたトークンはダイジェストと一致したらtrueを返す
@@ -31,7 +31,7 @@ class User < ApplicationRecord
 
   #ユーザーのログイン情報を破棄する
   def forget
-    update_attribute(:remember_digest, nil)
+    update_attribute(:remember_digest, nil) # remember_digestカラムをnilに更新
   end
 
   # 施策feedの定義

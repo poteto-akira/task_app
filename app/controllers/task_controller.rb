@@ -15,7 +15,7 @@ class TaskController < ApplicationController
                      user_id: current_user.id,
                      current_task_id: 1)
     if @task.save
-      redirect_to("/", notice: "タスクを登録しました")
+      redirect_to("/", notice: "タスクを登録しました") #引数に文字列を渡してもflash配列にメッセージを格納できる
     else
       redirect_to("/", notice: "タスクが正常に登録できませんでした")
     end

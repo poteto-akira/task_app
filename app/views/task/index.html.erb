@@ -9,42 +9,32 @@
   <h1>タスク一覧</h1>
 
   <!-- 現在ログインしているユーザーのタスクを一覧表示 -->
-
-  <table>
-    <tr>
-      <th>not started yet</th>
-      <th>working now</th>
-      <th>completion</th>
-    </tr>
-    <tr>
-      <td>
-        <% current_user.tasks.each do |task| %>
-          <% if task.current_task_id == 1 %>
+<!-- <table>
+  <tr>
+    <th>
+      <%= link_to("created_at", sort: "created_at") %>
+    </th>
+    <th>
+      <%= link_to("deadline", sort: "deadline desc") %>
+    </th>
+  </tr>
+</table> -->
+<table>
+  <thead>
+  <tr>
+    <th><%= sortable "created_at", "created_at" %></th>
+    <th><%= sortable "deadline", "deadline" %></th>
+  </tr>
+  </thead>
+</table>
+        <% @tasks.each do |task| %>
             <li>
               <%= link_to(task.name ,"/task/show/#{task.id}") %> / <%= link_to("次","/task/next/#{task.id}") %>
             </li>
-          <% end %>
+            <p>user_id<%= task.user_id %></p>
+            <p>created_at<%= task.created_at %></p>
+            <p>終了日時<%= task.deadline %></p>
+
         <% end %>
-      </td>
-      <td>
-        <% current_user.tasks.each do |task| %>
-          <% if task.current_task_id == 2 %>
-            <li>
-              <%= link_to("前","/task/back/#{task.id}") %> / <%= link_to(task.name ,"/task/show/#{task.id}") %> / <%= link_to("次","/task/next/#{task.id}") %>
-            </li>
-          <% end %>
-        <% end %>
-      </td>
-      <td>
-        <% current_user.tasks.each do |task| %>
-          <% if task.current_task_id == 3 %>
-            <li>
-              <%= link_to("前","/task/back/#{task.id}") %> / <%= link_to(task.name ,"/task/show/#{task.id}") %>
-            </li>
-          <% end %>
-        <% end %>
-      </td>
-    </tr>
-  </table>
 
 <% end %>

@@ -66,3 +66,5 @@ gem 'rails-i18n'
 
 # パスワードのハッシュ化
 gem 'bcrypt',         '3.1.12'
+
+gem 'rails_12factor', group: :production 

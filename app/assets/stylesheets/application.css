@@ -16,4 +16,43 @@
 
 html {
   text-align: center;
+  width: 100%;
+}
+
+li {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+body {
+  top: 100px;
+}
+
+.main {
+  position: absolute;
+  top: 100px;
+  width: 100%;
+}
+.header {
+  float: left;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 80px;
+  width: 100%;
+  margin: 0;
+}
+
+.header li {
+  float: left;
+  width: 130px;
+  padding: 30px;
+  font-size: 20px;
+}
+
+.header li a {
+  /* height: 30px; */
 }

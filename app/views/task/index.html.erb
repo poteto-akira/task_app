@@ -1,40 +1,25 @@
-<!-- <%= link_to("ユーザー登録", "/user/new") %>
-<%= link_to("ログイン", "/login") %> -->
+<div class="main">
+  <%= render ("new") %>
 
-<!-- _new.html.erbのテンプレートを表示 -->
-<%= render ("new") %>
+  <% if logged_in? %>
 
-<% if logged_in? %>
+    <h1>タスク一覧</h1>
+    <table>
+      <thead>
+      <tr>
+        <th><%= sortable "created_at", "created_at" %></th>
+        <th><%= sortable "deadline", "deadline" %></th>
+      </tr>
+      </thead>
+    </table>
+    <% @tasks.each do |task| %>
+      <li>
+        <%= link_to(task.name ,"/task/show/#{task.id}") %> / <%= link_to("次","/task/next/#{task.id}") %>
+      </li>
+      <p>user_id:<%= task.user_id %></p>
+      <p>created_at:<%= task.created_at %></p>
+      <p>終了日時:<%= task.deadline %></p>
+    <% end %>
 
-  <h1>タスク一覧</h1>
-
-  <!-- 現在ログインしているユーザーのタスクを一覧表示 -->
-<!-- <table>
-  <tr>
-    <th>
-      <%= link_to("created_at", sort: "created_at") %>
-    </th>
-    <th>
-      <%= link_to("deadline", sort: "deadline desc") %>
-    </th>
-  </tr>
-</table> -->
-<table>
-  <thead>
-  <tr>
-    <th><%= sortable "created_at", "created_at" %></th>
-    <th><%= sortable "deadline", "deadline" %></th>
-  </tr>
-  </thead>
-</table>
-        <% @tasks.each do |task| %>
-            <li>
-              <%= link_to(task.name ,"/task/show/#{task.id}") %> / <%= link_to("次","/task/next/#{task.id}") %>
-            </li>
-            <p>user_id<%= task.user_id %></p>
-            <p>created_at<%= task.created_at %></p>
-            <p>終了日時<%= task.deadline %></p>
-
-        <% end %>
-
-<% end %>
+  <% end %>
+</div>

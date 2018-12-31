@@ -20,9 +20,9 @@
       <% @tasks.each do |task| %>
         <% if task.user_id == current_user.id %>
           <tr>
-            <td><%= task.current_state %></td>
+            <td><%= status(task.current_state) %>/<%= task.current_state %></td>
             <td><%= task.deadline %></td>
-            <td><%= link_to(task.name ,"/task/show/#{task.id}") %> <!-- / <%= link_to("次","/task/next/#{task.id}") %> --></td>
+            <td><%= link_to(task.name ,"/task/show/#{task.id}") %> / <%= link_to("次","/task/next/#{task.id}") %></td>
           </tr>
         <% end %>
       <% end %>

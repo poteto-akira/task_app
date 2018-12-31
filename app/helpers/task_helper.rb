@@ -6,4 +6,17 @@ module TaskHelper
                                      params[:deadline]["date(4i)"].to_i, params[:deadline]["date(5i)"].to_i )
     end
   end
+
+  def status(state)
+    case state
+    when 1
+      "todo"
+    when 2
+      "doing"
+    when 3
+      "done"
+    else
+      "不明"
+    end
+  end
 end

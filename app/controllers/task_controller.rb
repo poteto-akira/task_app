@@ -15,7 +15,7 @@ class TaskController < ApplicationController
     @task = Task.new(name: params[:name],
                      content: params[:content],
                      user_id: current_user.id,
-                     current_state: 1,
+                     current_state: "3",
                     )
      deadline_check
     if @task.save

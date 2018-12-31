@@ -1,8 +1,10 @@
 class TaskController < ApplicationController
+  include TaskHelper
+  helper_method :sort_column, :sort_direction
   before_action :logged_in_user, only: [:create, :destroy]
 
   def index
-    @task = Task.all
+    @tasks = Task.all.order(sort_column + ' ' + sort_direction)
   end
 
   def new
@@ -13,7 +15,9 @@ class TaskController < ApplicationController
     @task = Task.new(name: params[:name],
                      content: params[:content],
                      user_id: current_user.id,
-                     current_task_id: 1)
+                     current_state: "3",
+                    )
+     deadline_check
     if @task.save
       redirect_to("/", notice: "タスクを登録しました") #引数に文字列を渡してもflash配列にメッセージを格納できる
     else
@@ -23,8 +27,8 @@ class TaskController < ApplicationController
 
   def next
     @task = Task.find_by(id: params[:id])
-    if @task.current_task_id < 3
-      @task.current_task_id += 1
+    if @task.current_state < 3
+      @task.current_state += 1
       if @task.save
         redirect_to("/")
       else
@@ -37,8 +41,8 @@ class TaskController < ApplicationController
 
   def back
     @task = Task.find_by(id: params[:id])
-    if @task.current_task_id > 0
-      @task.current_task_id -= 1
+    if @task.current_state > 0
+      @task.current_state -= 1
       if @task.save
         redirect_to("/")
       else
@@ -74,9 +78,13 @@ class TaskController < ApplicationController
     redirect_to("/", notice: "タスクを削除しました")
   end
 
-private
+  private
 
-  def task_params
-    params.require(:task).permit(:name)
+  def sort_direction
+    %w(asc desc).include?(params[:direction]) ? params[:direction] : "asc"
+  end
+
+  def sort_column
+    Task.column_names.include?(params[:sort]) ? params[:sort] : "name"
   end
 end

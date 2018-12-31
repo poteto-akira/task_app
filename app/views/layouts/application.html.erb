@@ -15,11 +15,13 @@
 
     <!-- ヘッダーエリア -->
     <% if logged_in? %>
-      <%= link_to("Home","/") %>
-      <%= link_to("Users","#") %>
-      <%= link_to("Profile","#") %>
-      <%= link_to("Settings", "/user/edit/#{current_user.id}" ) %>
-      <h3>現在のユーザー: <%= current_user.username %></h3>
+    <ul class="header">
+      <li><%= current_user.username %></li>
+      <li><%= link_to("Home","/") %></li>
+      <li><%= link_to("Users","#") %></li>
+      <li><%= link_to("Profile","#") %></li>
+      <li><%= link_to("Settings", "/user/edit/#{current_user.id}" ) %></li>
+    </ul>
 
     <% else %>
       <%= link_to("Log in",login_path) %>

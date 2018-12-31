@@ -14,7 +14,6 @@ Rails.application.routes.draw do
   get "task/back/:id" => "task#back"
   post "task/back/:id" => "task#back"
 
-
 # ユーザー関連
   get "user/show/:id" => "user#show"
   get "user/edit/:id" => "user#edit"

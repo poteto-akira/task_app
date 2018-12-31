@@ -1,50 +1,32 @@
-<!-- <%= link_to("ユーザー登録", "/user/new") %>
-<%= link_to("ログイン", "/login") %> -->
+<div class="main">
+  <%= render ("new") %>
 
-<!-- _new.html.erbのテンプレートを表示 -->
-<%= render ("new") %>
-
-<% if logged_in? %>
-
-  <h1>タスク一覧</h1>
-
-  <!-- 現在ログインしているユーザーのタスクを一覧表示 -->
-
-  <table>
-    <tr>
-      <th>not started yet</th>
-      <th>working now</th>
-      <th>completion</th>
-    </tr>
-    <tr>
-      <td>
-        <% current_user.tasks.each do |task| %>
-          <% if task.current_task_id == 1 %>
-            <li>
-              <%= link_to(task.name ,"/task/show/#{task.id}") %> / <%= link_to("次","/task/next/#{task.id}") %>
-            </li>
-          <% end %>
+  <% if logged_in? %>
+    <h1>タスク一覧</h1>
+    <table>
+      <thead>
+      <tr>
+        <th><%= sortable "created_at", "created_at" %></th>
+        <th><%= sortable "deadline", "deadline" %></th>
+      </tr>
+      </thead>
+    </table>
+    <table>
+      <tr>
+        <th>State</th>
+        <th>Limit</th>
+        <th>Task</th>
+      </tr>
+      <% @tasks.each do |task| %>
+        <% if task.user_id == current_user.id %>
+          <tr>
+            <td><%= status(task.current_state) %>/<%= task.current_state %></td>
+            <td><%= task.deadline %></td>
+            <td><%= link_to(task.name ,"/task/show/#{task.id}") %> / <%= link_to("次","/task/next/#{task.id}") %></td>
+          </tr>
         <% end %>
-      </td>
-      <td>
-        <% current_user.tasks.each do |task| %>
-          <% if task.current_task_id == 2 %>
-            <li>
-              <%= link_to("前","/task/back/#{task.id}") %> / <%= link_to(task.name ,"/task/show/#{task.id}") %> / <%= link_to("次","/task/next/#{task.id}") %>
-            </li>
-          <% end %>
-        <% end %>
-      </td>
-      <td>
-        <% current_user.tasks.each do |task| %>
-          <% if task.current_task_id == 3 %>
-            <li>
-              <%= link_to("前","/task/back/#{task.id}") %> / <%= link_to(task.name ,"/task/show/#{task.id}") %>
-            </li>
-          <% end %>
-        <% end %>
-      </td>
-    </tr>
-  </table>
+      <% end %>
+    </table>
+  <% end %>
 
-<% end %>
+</div>

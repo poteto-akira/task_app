@@ -10,11 +10,11 @@ module TaskHelper
   def status(state)
     case state
     when 1
-      "todo"
+      "TODO"
     when 2
-      "doing"
+      "DOING"
     when 3
-      "done"
+      "DONE"
     else
       "不明"
     end

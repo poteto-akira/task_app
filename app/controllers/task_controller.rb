@@ -4,7 +4,13 @@ class TaskController < ApplicationController
   before_action :logged_in_user, only: [:create, :destroy]
 
   def index
-    @tasks = Task.all.order(sort_column + ' ' + sort_direction)
+    if params[:current_state]
+      @tasks = Task.all.order(sort_column + ' ' + sort_direction).state(params[:current_state])
+    elsif params[:search]
+      @tasks = Task.all.order(sort_column + ' ' + sort_direction).search(params[:search])
+    else
+      @tasks = Task.all.order(sort_column + ' ' + sort_direction)
+    end
   end
 
   def new
@@ -15,7 +21,7 @@ class TaskController < ApplicationController
     @task = Task.new(name: params[:name],
                      content: params[:content],
                      user_id: current_user.id,
-                     current_state: "3",
+                     current_state: 1,
                     )
      deadline_check
     if @task.save

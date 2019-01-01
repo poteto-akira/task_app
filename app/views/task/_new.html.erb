@@ -18,6 +18,11 @@
     %>
   </div>
   <div>
+    <p>優先順位</p>
+    <label><%= radio_button "priority", "p", 3 %>高</label>
+    <label><%= radio_button "priority", "p", 2 %>中</label>
+    <label><%= radio_button "priority", "p", 1 %>低</label>
+  <div>
     <input class="submit" id="submit1" type="submit" value="登録">
   </div>
 <% end %>

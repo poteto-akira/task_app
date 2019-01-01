@@ -11,30 +11,8 @@
       <label><input name="current_state" type="checkbox" value=3 />DONE</label>
       <%= submit_tag "Search", :name => nil %>
     <% end %>
-    <table>
-      <thead>
-      <tr>
-        <th><%= sortable "created_at", "created_at" %></th>
-        <th><%= sortable "deadline", "deadline" %></th>
-      </tr>
-      </thead>
-    </table>
-    <table>
-      <tr>
-        <th>State</th>
-        <th>Limit</th>
-        <th>Task</th>
-      </tr>
-      <% @tasks.each do |task| %>
-        <% if task.user_id == current_user.id %>
-          <tr>
-            <td><%= status(task.current_state) %>/<%= task.current_state %></td>
-            <td><%= task.deadline %></td>
-            <td><%= link_to(task.name ,"/task/show/#{task.id}") %> / <%= link_to("次","/task/next/#{task.id}") %></td>
-          </tr>
-        <% end %>
-      <% end %>
-    </table>
+    <%= render partial: 'tasks' %>
+    
   <% end %>
 
 </div>

@@ -7,6 +7,11 @@ module TaskHelper
     end
   end
 
+  def priority
+    return if !params[:priority]
+    @task.priority = params[:priority][:p]
+  end
+
   def status(state)
     case state
     when 1
@@ -17,6 +22,19 @@ module TaskHelper
       "DONE"
     else
       "不明"
+    end
+  end
+
+  def hoge(num)
+    case num
+    when 3
+      "高"
+    when 2
+      "中"
+    when 1
+      "低"
+    else
+      ""
     end
   end
 end

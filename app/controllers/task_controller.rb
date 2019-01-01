@@ -21,9 +21,10 @@ class TaskController < ApplicationController
     @task = Task.new(name: params[:name],
                      content: params[:content],
                      user_id: current_user.id,
-                     current_state: 1,
+                     current_state: 1
                     )
      deadline_check
+     priority
     if @task.save
       redirect_to("/", notice: "タスクを登録しました") #引数に文字列を渡してもflash配列にメッセージを格納できる
     else

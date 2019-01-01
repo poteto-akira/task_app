@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
 
   get 'sessions/new'
+  
 # タスク関連
   get '/' => "task#index"
   get "task/new" => "task#new"
@@ -13,6 +14,7 @@ Rails.application.routes.draw do
   post "task/next/:id" => "task#next"
   get "task/back/:id" => "task#back"
   post "task/back/:id" => "task#back"
+  get "task/search" => "task#search"
 
 # ユーザー関連
   get "user/show/:id" => "user#show"

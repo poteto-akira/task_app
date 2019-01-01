@@ -9,7 +9,7 @@
 
 # Ignore all logfiles and tempfiles.
 /log/*
-/tmp/*
+
 !/log/.keep
 !/tmp/.keep
 
@@ -30,4 +30,6 @@
 app/.DS_Store
 app/views/.DS_Store
 vendor/.DS_Store
+db/migrate/
+tmp/
 vendor/bundle/

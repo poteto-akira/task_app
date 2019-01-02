@@ -49,8 +49,9 @@ test:
 #
 production:
   <<: *default
-  adapter: mysql2
-  database: heroku_ff1ad11fcb7afd9
-  username: b3c72b6d78f05c
-  password: <%= ENV['DATABASE_PASSWORD'] %>
-  encoding: utf8
+  adapter: postgresql
+  encoding: unicode
+  database: db/production.postgresql
+  pool: 5
+  username: poteto-akira
+  password:

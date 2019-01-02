@@ -76,4 +76,4 @@ gem 'kaminari-bootstrap', '~> 3.0.1'
 gem 'bootstrap', '~> 4.1.1'
 gem 'jquery-rails'
 
-gem 'pg'
+gem 'pg', '~> 0.19.0', group: :production

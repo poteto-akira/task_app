@@ -9,9 +9,18 @@ table {
 }
 
 tbody {
-  // width: 90%;
 }
 
 table th {
-  // width: 30%;
+  text-align: center;
+}
+
+nav {
+  width: 100%;
+}
+
+.pagination {
+  padding-left: 100px !important;
+  width: 50%;
+  margin: 0 auto;
 }

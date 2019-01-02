@@ -2,14 +2,15 @@ class TaskController < ApplicationController
   include TaskHelper
   helper_method :sort_column, :sort_direction
   before_action :logged_in_user, only: [:create, :destroy]
+  PER = 8
 
   def index
     if params[:current_state]
-      @tasks = Task.all.order(sort_column + ' ' + sort_direction).state(params[:current_state])
+      @tasks = Task.all.order(sort_column + ' ' + sort_direction).state(params[:current_state]).page(params[:page]).per(PER)
     elsif params[:search]
-      @tasks = Task.all.order(sort_column + ' ' + sort_direction).search(params[:search])
+      @tasks = Task.all.order(sort_column + ' ' + sort_direction).search(params[:search]).page(params[:page]).per(PER)
     else
-      @tasks = Task.all.order(sort_column + ' ' + sort_direction)
+      @tasks = Task.all.order(sort_column + ' ' + sort_direction).page(params[:page]).per(PER)
     end
   end
 

@@ -25,7 +25,7 @@ module TaskHelper
     end
   end
 
-  def hoge(num)
+  def priority_state(num)
     case num
     when 3
       "高"

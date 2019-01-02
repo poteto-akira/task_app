@@ -78,5 +78,5 @@ gem 'bootstrap', '~> 4.1.1'
 gem 'jquery-rails'
 
 group :production do
-  gem 'pg'
+  gem 'pg', '~> 0.19.0'
 end

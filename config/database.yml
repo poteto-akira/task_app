@@ -52,3 +52,4 @@ production:
   database: heroku_ff1ad11fcb7afd9
   username: b3c72b6d78f05c
   password: <%= ENV['DATABASE_PASSWORD'] %>
+  encoding: utf8

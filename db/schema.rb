@@ -17,7 +17,7 @@ ActiveRecord::Schema.define(version: 2019_01_01_204913) do
     t.string "name", null: false
     t.text "content"
     t.integer "current_state", default: 1
-    t.string "priority"
+    t.integer "priority", default: 0
     t.datetime "deadline"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

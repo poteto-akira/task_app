@@ -68,3 +68,12 @@ gem 'rails-i18n'
 gem 'bcrypt',         '3.1.12'
 
 gem 'rails_12factor', group: :production
+
+gem 'kaminari', '~> 0.17.0'
+
+gem 'kaminari-bootstrap', '~> 3.0.1'
+
+gem 'bootstrap', '~> 4.1.1'
+gem 'jquery-rails'
+
+gem 'pg', '~> 0.19.0', group: :production

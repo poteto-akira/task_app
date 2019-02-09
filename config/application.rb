@@ -22,6 +22,8 @@ module TaskApp
     #タイムゾーンをJSTに設定
     config.active_record.default_timezone = :local
     config.time_zone = 'Tokyo'
+    config.assets.initialize_on_precompile = false
+
 
   end
 end

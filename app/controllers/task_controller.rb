@@ -2,19 +2,25 @@ class TaskController < ApplicationController
   include TaskHelper
   helper_method :sort_column, :sort_direction
   before_action :logged_in_user, only: [:create, :destroy]
+  PER = 8
 
   def index
     if params[:current_state]
-      @tasks = Task.all.order(sort_column + ' ' + sort_direction).state(params[:current_state])
+      @tasks = Task.all.order(sort_column + ' ' + sort_direction).state(params[:current_state]).page(params[:page]).per(PER)
     elsif params[:search]
-      @tasks = Task.all.order(sort_column + ' ' + sort_direction).search(params[:search])
+      @tasks = Task.all.order(sort_column + ' ' + sort_direction).search(params[:search]).page(params[:page]).per(PER)
     else
-      @tasks = Task.all.order(sort_column + ' ' + sort_direction)
+      @tasks = Task.all.order(sort_column + ' ' + sort_direction).page(params[:page]).per(PER)
     end
   end
 
   def new
     @task = Task.new
+  end
+
+  def confirm_new
+    @task = current_user.tasks.new(task_params)
+    render :new unless @task.valid?
   end
 
   def create
@@ -25,7 +31,7 @@ class TaskController < ApplicationController
                     )
      deadline_check
      priority
-    if @task.save
+    if @task.save!
       redirect_to("/", notice: "タスクを登録しました") #引数に文字列を渡してもflash配列にメッセージを格納できる
     else
       redirect_to("/", notice: "タスクが正常に登録できませんでした")
@@ -61,7 +67,7 @@ class TaskController < ApplicationController
   end
 
   def show
-    @task = Task.find_by(id: params[:id])
+    @task = Task.find(params[:id])
   end
 
   def edit
@@ -86,6 +92,10 @@ class TaskController < ApplicationController
   end
 
   private
+
+  def task_params
+    params.require(:task).permit(:name, :content, :user_id, :current_state)
+  end
 
   def sort_direction
     %w(asc desc).include?(params[:direction]) ? params[:direction] : "asc"

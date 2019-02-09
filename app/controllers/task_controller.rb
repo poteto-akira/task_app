@@ -18,6 +18,11 @@ class TaskController < ApplicationController
     @task = Task.new
   end
 
+  def confirm_new
+    @task = current_user.tasks.new(task_params)
+    render :new unless @task.valid?
+  end
+
   def create
     @task = Task.new(name: params[:name],
                      content: params[:content],
@@ -26,7 +31,7 @@ class TaskController < ApplicationController
                     )
      deadline_check
      priority
-    if @task.save
+    if @task.save!
       redirect_to("/", notice: "タスクを登録しました") #引数に文字列を渡してもflash配列にメッセージを格納できる
     else
       redirect_to("/", notice: "タスクが正常に登録できませんでした")
@@ -62,7 +67,7 @@ class TaskController < ApplicationController
   end
 
   def show
-    @task = Task.find_by(id: params[:id])
+    @task = Task.find(params[:id])
   end
 
   def edit
@@ -87,6 +92,10 @@ class TaskController < ApplicationController
   end
 
   private
+
+  def task_params
+    params.require(:task).permit(:name, :content, :user_id, :current_state)
+  end
 
   def sort_direction
     %w(asc desc).include?(params[:direction]) ? params[:direction] : "asc"

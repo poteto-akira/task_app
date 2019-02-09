@@ -29,12 +29,12 @@ class TaskController < ApplicationController
                      user_id: current_user.id,
                      current_state: 1
                     )
-     deadline_check
-     priority
+    deadline_check
+    priority
     if @task.save!
-      redirect_to("/", notice: "タスクを登録しました") #引数に文字列を渡してもflash配列にメッセージを格納できる
+      redirect_to(root_path, notice: "タスクを登録しました") #引数に文字列を渡してもflash配列にメッセージを格納できる
     else
-      redirect_to("/", notice: "タスクが正常に登録できませんでした")
+      redirect_back(fallback_location: root_path, notice: "保存に失敗しました")
     end
   end
 
@@ -92,10 +92,6 @@ class TaskController < ApplicationController
   end
 
   private
-
-  def task_params
-    params.require(:task).permit(:name, :content, :user_id, :current_state)
-  end
 
   def sort_direction
     %w(asc desc).include?(params[:direction]) ? params[:direction] : "asc"

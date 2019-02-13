@@ -1,6 +1,7 @@
 <h1>詳細</h1>
 
   <div>
-    <%= link_to(@task.name, "/task/edit/#{@task.id}") %>
+    <%= @task.name %>
     <%= @task.content %>
+    <%= link_to("削除", @task, method: :delete, data: { confirm: "タスク「#{@task.name}を削除します。よろしいですか。」"}) %>
   </div>

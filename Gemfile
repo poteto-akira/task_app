@@ -77,3 +77,7 @@ gem 'bootstrap', '~> 4.1.1'
 gem 'jquery-rails'
 
 gem 'pg', '~> 0.19.0', group: :production
+
+gem 'pry-byebug', require: false
+
+gem 'sidekiq'

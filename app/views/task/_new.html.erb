@@ -23,7 +23,7 @@
     <label><%= radio_button "priority", "p", 2 %>中</label>
     <label><%= radio_button "priority", "p", 1 %>低</label>
   <div>
-    <input class="submit" id="submit1" type="submit" value="登録">
+    <input class="submit" id="submit1" type="submit" value="登録" >
   </div>
 <% end %>
 
@@ -40,5 +40,12 @@
             $("#submit1").prop("disabled", false);
           }
         });
+      });
+    //送信ボタンを押した際に送信ボタンを無効化する（連打による多数送信回避）
+      $(function(){
+      	$('[type="submit"]').click(function(){
+      		$(this).prop('disabled',true);//ボタンを無効化する
+      		$(this).closest('form').submit();//フォームを送信する
+      	});
       });
     </script>

@@ -31,7 +31,7 @@ class TaskController < ApplicationController
                     )
     deadline_check
     priority
-    if @task.save!
+    if @task.save
       SampleJob.set(wait: 1.minutes).perform_later
       redirect_to(root_path, notice: "タスクを登録しました") #引数に文字列を渡してもflash配列にメッセージを格納できる
     else
